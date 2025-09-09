@@ -49,6 +49,28 @@ This repository contains reorganized analysis scripts for EEG/ERP data analysis,
    - Imports and visualizes SNR analysis results from Python
    - Exports plots in PDF and SVG formats
 
+## Configuration
+
+Before running the scripts, you need to update the file paths to match your data location:
+
+### Python Scripts Configuration
+
+In each Python script, update the data path at the top:
+
+```python
+# Update this path to point to your raw EEG data directory
+DATA_PATH = "/path/to/your/data/1_raw"
+```
+
+### R Scripts Configuration  
+
+In `R/01_data_preparation.R`, update the CSV path:
+
+```r
+# Update this path to point to your processed CSV file
+DATA_CSV_PATH <- "/path/to/your/data/2_preprocessed/285-345ms/combined_task-nouns_285-345ms.csv"
+```
+
 ## Usage
 
 ### Python Workflow

@@ -24,6 +24,16 @@ suppressPackageStartupMessages({
   library(tidyverse)
 })
 
+# ============================================================================
+# CONFIGURATION SECTION - MODIFY THESE PATHS FOR YOUR DATA
+# ============================================================================
+
+# Path to the combined CSV file created by Python script 03_data_preparation.py
+# This should be in your data/2_preprocessed/285-345ms/ directory
+DATA_CSV_PATH <- "/Users/johannberger/Documents/thesis/data/2_preprocessed/285-345ms/combined_task-nouns_285-345ms.csv"
+
+# ============================================================================
+
 # Install and load svglite for SVG export (with error handling)
 if (!require("svglite", quietly = TRUE)) {
   tryCatch({
@@ -206,9 +216,8 @@ main <- function() {
   cat("  ROI electrodes:", length(params$electrode), "channels\n")
   cat("  Conditions:", paste(params$conditions, collapse = ", "), "\n")
   
-  # Load data (update path as needed)
-  data_path <- "/Users/johannberger/Documents/thesis/data/2_preprocessed/285-345ms/combined_task-nouns_285-345ms.csv"
-  df <- load_data(data_path)
+  # Load data using configured path
+  df <- load_data(DATA_CSV_PATH)
   
   # Create cumulative datasets
   datasets <- create_cumulative_datasets(df, params$electrode, params$conditions)

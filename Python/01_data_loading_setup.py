@@ -21,13 +21,37 @@ from copy import deepcopy
 # Suppress MNE info messages
 mne.set_log_level('WARNING')
 
+# ============================================================================
+# CONFIGURATION SECTION - MODIFY THESE PATHS FOR YOUR DATA
+# ============================================================================
+
+# Path to your raw data directory containing subject folders
+# Each subject folder should contain a 'preprocessed-epo' subdirectory
+# with .fif files named like: {subject}_task-nouns_eeg-epo_100_70_cutoff.fif
+DATA_PATH = "/Users/johannberger/Documents/thesis/data/1_raw"
+
+# Alternative: Use relative path if data is in your repository
+# DATA_PATH = os.path.join(os.getcwd(), "..", "data", "1_raw")
+
+# ============================================================================
+
 
 def setup_parameters():
     """Define experimental parameters and paths."""
     
     # Project setup
     project_root = os.path.abspath(os.path.join(os.getcwd(), ".."))
-    data_path = os.path.join(project_root, "data", "1_raw")
+    
+    # Use the configured data path
+    data_path = DATA_PATH
+    
+    # Validate that the data path exists
+    if not os.path.exists(data_path):
+        raise FileNotFoundError(
+            f"Data path not found: {data_path}\n"
+            f"Please update the DATA_PATH variable at the top of this script "
+            f"to point to your actual data directory."
+        )
     
     # Subjects list
     subjects = [

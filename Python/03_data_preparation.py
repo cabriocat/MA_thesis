@@ -182,7 +182,13 @@ def main():
     
     # Setup parameters (inline to avoid import issues)
     project_root = os.path.abspath(os.path.join(os.getcwd(), ".."))
-    data_path = os.path.join(project_root, "data", "1_raw")
+    
+    # Data path - Update this to match your actual data location
+    data_path = "/Users/johannberger/Documents/thesis/data/1_raw"
+    
+    # Validate path exists
+    if not os.path.exists(data_path):
+        raise FileNotFoundError(f"Data path not found: {data_path}")
     
     subjects = [
         "sub-bravoc001", "sub-bravoc002", "sub-bravoc003", "sub-bravoc004",

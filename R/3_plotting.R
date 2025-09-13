@@ -1,4 +1,4 @@
-# source("~/Documents/GitHub/MA_thesis/data/2_preprocessed/285-345ms/2_PairwiseComparisons.R")
+source("~/Documents/GitHub/MA_thesis/R/2_PairwiseComparisons.R")
 
 category_levels <- c("animal", "food", "tool", "commun", "emotion", "social")
 df_1_3$category <- factor(df_1_3$category, levels = category_levels)

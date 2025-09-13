@@ -1,4 +1,4 @@
-source("~/Documents/GitHub/MA_thesis/R/0_Prepration.R")
+source("~/Documents/GitHub/MA_thesis/R/0_Preparation.R")
 
 mdl1_df1 <- lmer(mean_voltage ~ category + (1 | subject) + (1 | item), # This Model is used
                  data = df_1)

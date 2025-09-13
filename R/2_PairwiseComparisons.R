@@ -1,4 +1,4 @@
-source("~/Documents/GitHub/MA_thesis/data/2_preprocessed/285-345ms/1_MainModels.R")
+source("~/Documents/GitHub/MA_thesis/R/1_MainModels.R")
 
 # Pairwise comparisons for all main models
 

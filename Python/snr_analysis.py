@@ -381,7 +381,7 @@ def create_snr_plots(summary):
     """
     
     # Create subplots
-    fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(8, 8))
+    fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(8, 12))
     
     # Top plot: SNR
     ax1.errorbar(
@@ -395,9 +395,9 @@ def create_snr_plots(summary):
     for x, y in zip(summary['cum_reps'], summary['mean']):
         ax1.text(x, y, f'{y:.2f}', ha='center', va='bottom', fontsize=8)
     
-    ax1.set_xlabel('Cumulative repetitions (actual count)')
+    ax1.set_xlabel('')
     ax1.set_ylabel('Mean SNR (µV/µV)')
-    ax1.set_title('Cumulative SNR across subjects (ROI)')
+    ax1.set_title('')
     ax1.xaxis.set_major_locator(MaxNLocator(integer=True))
     ax1.grid(True)
     
@@ -410,9 +410,9 @@ def create_snr_plots(summary):
         for x, y in zip(cum_reps_f, f_vals):
             ax2.text(x, y, f'{y:.2f}', ha='center', va='bottom', fontsize=8)
     
-    ax2.set_xlabel('Cumulative repetitions (actual count)')
+    ax2.set_xlabel('Cumulative presentations')
     ax2.set_ylabel('F-value (t²)')
-    ax2.set_title('F-values from paired t-tests (next-neighbor comparisons)')
+    ax2.set_title('')
     ax2.xaxis.set_major_locator(MaxNLocator(integer=True))
     ax2.grid(True, alpha=0.3)
     
@@ -482,7 +482,7 @@ def main():
     print("=" * 60)
     
     # Setup parameters (inline to avoid import issues)
-    project_root = os.path.abspath(os.path.join(os.getcwd(), ".."))
+    project_root = os.path.abspath(os.getcwd())
     
     # Data path - Update this to match your actual data location
     data_path = "/Users/johannberger/Documents/thesis/data/1_raw"

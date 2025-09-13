@@ -181,7 +181,7 @@ def main():
     print("=" * 60)
     
     # Setup parameters (inline to avoid import issues)
-    project_root = os.path.abspath(os.path.join(os.getcwd(), ".."))
+    project_root = os.path.abspath(os.getcwd())
     
     # Data path - Update this to match your actual data location
     data_path = "/Users/johannberger/Documents/thesis/data/1_raw"

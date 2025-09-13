@@ -367,8 +367,8 @@ generate_all_plots <- function(datasets, pairwise_results, params, output_dir) {
   # Create SNR plots (if data available)
   cat("Creating SNR analysis plots...\n")
   
-  snr_data_path <- "/Users/johannberger/Documents/thesis/data/3_analysis/cumulative_snr_data.csv"
-  f_data_path <- "/Users/johannberger/Documents/thesis/data/3_analysis/f_values_data.csv"
+  snr_data_path <- "data/3_analysis/cumulative_snr_data.csv"
+  f_data_path <- "data/3_analysis/f_values_data.csv"
   
   snr_plots <- create_snr_plots(snr_data_path, f_data_path)
   
@@ -408,7 +408,7 @@ main <- function() {
   }
   
   # Set output directory
-  output_dir <- "/Users/johannberger/Documents/thesis/data/4_plots"
+  output_dir <- "data/4_plots"
   
   # Generate all plots
   generate_all_plots(

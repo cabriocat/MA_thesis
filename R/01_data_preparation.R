@@ -12,7 +12,26 @@
 # - Create cumulative datasets (1, 1-2, 1-3, ..., 1-6 repetitions)
 # - Apply proper contrast coding for statistical analysis
 
-# Load required libraries
+# Load required libraries with error handling
+required_packages <- c("glue", "lme4", "lmerTest", "RColorBrewer", "ggsignif", 
+                      "emmeans", "broom.mixed", "tidyverse")
+
+# Check for missing packages
+missing_packages <- required_packages[!sapply(required_packages, function(pkg) {
+  requireNamespace(pkg, quietly = TRUE)
+})]
+
+if (length(missing_packages) > 0) {
+  cat("❌ ERROR: Missing required R packages!\n")
+  cat("Missing packages:", paste(missing_packages, collapse = ", "), "\n\n")
+  cat("To fix this, please run the package installation script first:\n")
+  cat("source('R/00_install_packages.R')\n\n")
+  cat("Or install packages manually:\n")
+  cat("install.packages(c(", paste(paste0('"', missing_packages, '"'), collapse = ", "), "))\n\n")
+  stop("Please install missing packages and try again.")
+}
+
+# Load libraries (only if all packages are available)
 suppressPackageStartupMessages({
   library(glue)
   library(lme4)
@@ -30,21 +49,17 @@ suppressPackageStartupMessages({
 
 # Path to the combined CSV file created by Python script 03_data_preparation.py
 # This should be in your data/2_preprocessed/285-345ms/ directory
-DATA_CSV_PATH <- "/Users/johannberger/Documents/thesis/data/2_preprocessed/285-345ms/combined_task-nouns_285-345ms.csv"
+DATA_CSV_PATH <- "data/2_preprocessed/285-345ms/combined_task-nouns_285-345ms.csv"
 
 # ============================================================================
 
-# Install and load svglite for SVG export (with error handling)
-if (!require("svglite", quietly = TRUE)) {
-  tryCatch({
-    install.packages("svglite", dependencies = TRUE)
-    library(svglite)
-    cat("✓ Successfully installed and loaded svglite\n")
-  }, error = function(e) {
-    cat("⚠ Warning: svglite package could not be installed.\n")
-    cat("SVG export may not work. Consider installing manually:\n")
-    cat("install.packages('svglite')\n")
-  })
+# Check and load svglite for SVG export (optional)
+if (!requireNamespace("svglite", quietly = TRUE)) {
+  cat("ℹ Note: svglite package not installed. SVG export will not be available.\n")
+  cat("To enable SVG export, install svglite: install.packages('svglite')\n")
+} else {
+  library(svglite)
+  cat("✓ svglite loaded for SVG export\n")
 }
 
 #' Setup experimental parameters

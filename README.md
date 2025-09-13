@@ -12,4 +12,4 @@ The R scripts contain:
 2. LMM's of the main effects and pairwise comparisons.
 3. Plotting of respective data.
 
-If somebody findy interest/would like to use this code - do it, I dont care.
+If somebody finds interest/would like to use this code - do it, I dont care.

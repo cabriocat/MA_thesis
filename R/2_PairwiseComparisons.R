@@ -81,5 +81,4 @@ extract_significant(pairs1_6, "Repetitions 1-6")
 
 # Pairwsie comparisons for repetition vs category slope
 tr <- emtrends(mdl1_6, ~ category, var = "repetition_c")
-summary(tr, adjust = "none")
 pairs(tr, adjust = "none")

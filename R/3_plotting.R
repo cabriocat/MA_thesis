@@ -48,7 +48,7 @@ p_trend <- ggplot(df_1_6, aes(x = repetition, y = mean_voltage, colour = categor
   scale_color_manual(values = plot_colors) +
   labs(
     title = NULL,
-    x = "Repetition",
+    x = "Presentation",
     y = "Mean voltage (\u03bcV)",
     colour = "Category"
   ) +
@@ -98,3 +98,45 @@ ggsave(file.path(out_dir, "trendplot.pdf"), p_trend,
        device = "pdf", width = 12, height = 8)
 ggsave(file.path(out_dir, "interaction.pdf"), p_int,
        device = "pdf", width = 12, height = 8)
+
+
+
+
+
+# assume df_1_6 is your data, with columns: repetition, category, mean_voltage
+
+# 1. compute the overall mean across categories for each repetition
+df_overall <- df_1_6 %>%
+  group_by(repetition) %>%
+  summarise(overall_mean = mean(mean_voltage, na.rm = TRUE))
+
+# 2. the trend_mean plot
+p_trend_mean <- ggplot(df_1_6, aes(x = repetition, y = mean_voltage, group = category, colour = category)) +
+  # transparent lines for each category
+  stat_summary(fun = mean, geom = "line", linewidth = 1, alpha = 0.4) +
+  stat_summary(fun = mean, geom = "point", size = 1.5, alpha = 0.4) +
+  stat_summary(fun.data = mean_se, geom = "errorbar", width = 0.2, alpha = 0.4) +
+  
+  # add the overall mean line
+  geom_line(data = df_overall, aes(x = repetition, y = overall_mean, group = 1),
+            colour = "black", size = 1.5) +
+  geom_point(data = df_overall, aes(x = repetition, y = overall_mean, group = 1),
+             colour = "black", size = 2)
+
+# keep your scale_y_reverse, color scales etc.
+p_trend_mean <- p_trend_mean +
+  scale_y_reverse() +
+  scale_color_manual(values = plot_colors) +
+  labs(
+    x = "Presentation",
+    y = expression("Mean voltage ("*mu*"V)"),
+    colour = "Category"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    legend.position = "bottom",
+    legend.direction = "horizontal"
+  )
+
+# then save it
+ggsave(file.path(out_dir, "trend_mean.pdf"), p_trend_mean, device = "pdf", width = 12, height = 8)

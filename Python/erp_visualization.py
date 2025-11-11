@@ -36,7 +36,7 @@ def setup_parameters():
     project_root = os.path.abspath(os.getcwd())
     
     # Data path - Update this to match your actual data location
-    data_path = "/Users/johannberger/Documents/thesis/data/1_raw"
+    data_path = "/Users/johannberger/Documents/Archive/MA_thesis/data/1_raw"
     
     # Validate that the data path exists
     if not os.path.exists(data_path):
